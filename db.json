@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "name": "phteree",
+      "email": "tigran.filosov@gmail.com",
+      "password": "CACA123321",
+      "content": [],
+      "id": "h1QNswHN4vA"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

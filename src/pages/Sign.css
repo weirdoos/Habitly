@@ -1,0 +1,65 @@
+.sign{
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    background-color: #fafbf7;
+}
+
+.subtext{
+    width: 70%;
+    font-weight: 100;
+    margin-bottom: 20px;
+}
+
+
+.label{
+    display: flex;
+    flex-direction: column;
+}
+
+.content{
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.logo{
+    display: flex;
+    justify-content: start;
+    text-align: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+input{
+    border-radius: 10px;
+    outline: none;
+    border: #e4e7e3 1px solid;
+    padding: 10px 20px;
+    margin-top: 10px;
+}
+
+.signInBtn{
+    background-color: #b8ff4f;
+    border:none;
+    padding: 15px;
+    border-radius: 20px;
+
+    &:hover{
+        background-color: #dffe9e;
+    }
+}
+
+.link{
+    color: #a9ea49;
+}

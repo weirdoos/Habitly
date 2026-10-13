@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import './Page.css'
+import './Home.css'
 import Avatar from "../components/Avatar"
+import Clock from "../components/Date"
+import HabitsCompletion from "../components/HabitsCompletion"
 
 const Home = () => {
   const [isLogged, setIsLogged] = useState(false)
@@ -18,7 +21,7 @@ const Home = () => {
     
   }, [])
 
-  const date = Date()
+  
 
 
   return (
@@ -31,9 +34,9 @@ const Home = () => {
         </div>
 
         <div className="buttons">
-          <div className="date">{date}</div>
+          <div className="date"><Clock /></div>
           <div className="notif">
-            <button>+</button>
+            <>+</>
           </div>
           <div className="avatar">
             <Avatar />
@@ -45,6 +48,11 @@ const Home = () => {
 
       </div>
       
+    <div className="data">
+      <HabitsCompletion percent={20} />
+    </div>
+
+
     </div>
   )
 }

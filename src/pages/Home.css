@@ -1,0 +1,42 @@
+.firststroke{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.clock{
+    background-color: #b8ff4f;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.data{
+    margin-top: 20px;
+}
+
+.HabitCard{
+    background-color: #bdb9b9;
+    padding: 20px;
+    border-radius: 20px;
+    
+}
+
+.percentage{
+    
+    z-index: 1000;
+    color: black;
+}
+
+.stats{
+    display: flex;
+    gap: 20px;
+}

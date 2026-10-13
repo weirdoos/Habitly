@@ -4,3 +4,8 @@
     width: calc(100vw - 20px);
     padding: 10px;
 }
+
+main {
+    flex: 1;
+    min-width: 0;
+}

@@ -22,7 +22,7 @@ const SignUp = () => {
             const { password , ...user } = result
             localStorage.removeItem('user')
             localStorage.setItem('user', JSON.stringify(user))
-            navigate('/home')
+            navigate('/app/home')
             setIsVisiblePassword(false)
             setEmail('')
             setPassword('')

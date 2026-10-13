@@ -1,0 +1,14 @@
+.page{
+    padding: 20px;
+    width: 100%;
+}
+
+.firststroke{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons{
+    display: flex;
+}

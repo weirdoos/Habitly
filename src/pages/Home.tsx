@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-
+import './Page.css'
+import Avatar from "../components/Avatar"
 
 const Home = () => {
   const [isLogged, setIsLogged] = useState(false)
@@ -7,9 +8,8 @@ const Home = () => {
 
   useEffect(() => {
     if(localStorage.getItem('user')) {
-      const rawData = localStorage.getItem('user')
+      const rawData:string | null = localStorage.getItem('user')
       const user = JSON.parse(rawData)
-      console.log(user.name)
       setUser(user.name)
       setIsLogged(true)
     } else {
@@ -17,8 +17,35 @@ const Home = () => {
     }
     
   }, [])
+
+  const date = Date()
+
+
   return (
-    <div className="home">Welcome, { isLogged ? user : 'Guest'}</div>
+    <div className="page">
+      <div className="firststroke">
+
+        <div className="greetings">
+          <h1>Welcome, { isLogged ? user : 'Guest'}</h1>
+          <h4>Small steps make a big changes</h4>
+        </div>
+
+        <div className="buttons">
+          <div className="date">{date}</div>
+          <div className="notif">
+            <button>+</button>
+          </div>
+          <div className="avatar">
+            <Avatar />
+          </div>
+
+        </div>
+
+
+
+      </div>
+      
+    </div>
   )
 }
 

@@ -1,0 +1,80 @@
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    background-color: #0f1214;
+    padding: 20px;
+    color: #fff;
+    border-radius: 20px;
+    justify-content: space-between;
+    
+}
+
+.img{
+    width: 48px;
+    border-radius: 15px;
+}
+
+.pages{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    
+}
+
+.Link{
+    text-decoration: none;
+    color: #fff;
+    border:none;
+    padding: 10px;
+    border-radius: 15px;
+    transition: all 0.2s;
+
+    &:hover{
+        background-color: #cbff7d;
+        color: #0f1214;
+
+    }
+}
+
+.Link.active{
+    background-color: #b8ff4f;
+    color: #0f1214;
+}
+
+.streak{
+    padding: 20px;
+    border: 1px #40413f solid;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.profile{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 20px;
+    transition: all 0.2s;
+    &:hover{
+        background-color: #2a2a29;
+    }
+
+}
+
+.left{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.avatar{
+    background-color: #40413f;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}

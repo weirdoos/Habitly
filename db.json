@@ -6,6 +6,13 @@
       "password": "CACA123321",
       "content": [],
       "id": "h1QNswHN4vA"
+    },
+    {
+      "name": "bounty prod",
+      "email": "tigran.filosov@gmail.c",
+      "password": "CACA123321",
+      "content": [],
+      "id": "lgjMIimlHxg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

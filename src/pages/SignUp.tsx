@@ -46,7 +46,7 @@ const SignUp = () => {
         setPassword('');
         setName('');
 
-        navigate('/Home');
+        navigate('/app/home');
  
       }
 

@@ -1,25 +1,37 @@
 import { useState } from "react"
 import './Sign.css'
 import { useNavigate } from "react-router-dom"
+import { useUser } from "../context/UserContext"
+import type { User } from "../types/Sign.types"
 const SignUp = () => {
+
+      const {setIsLogged, isLogged , setUsername} = useUser()
       
       const [email, setEmail] = useState('')
       const [password, setPassword] = useState('')
-      const [isLogged, setIsLogged] = useState(false)
       const [isVisiblePassword, setIsVisiblePassword] = useState(false)
       const navigate = useNavigate()
       
       
     
       async function fetchAddUser(email:string, password: string) {
+
+
     
         
         const response = await fetch(`http://localhost:3000/users?email=${email}`)
         const data = await response.json()
         const result = data[0]
+
+        const user:User = {
+          name: result.name,
+          email: result.email,
+          id: result.id
+        }
+
         if(result.password === password) {
             setIsLogged(true)
-            const { password , ...user } = result
+            setUsername(result.name)
             localStorage.removeItem('user')
             localStorage.setItem('user', JSON.stringify(user))
             navigate('/app/home')
@@ -29,7 +41,6 @@ const SignUp = () => {
         } else {
           setIsLogged(false)
         }
-        console.log(isLogged)
         setEmail('')
         setPassword('')
         

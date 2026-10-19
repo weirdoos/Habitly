@@ -1,23 +1,19 @@
-import { useEffect, useState } from 'react'
+
 import './Sidebar.css'
 import Avatar from './Avatar'
+import { useUser } from '../context/UserContext'
 
 const Profile = () => {
-    const [name, setName] = useState('')
-
-    useEffect(() => {
-        const user= localStorage.getItem('user')
-        setName(JSON.parse(user).name)
-        
-
-    }, [])
+    
+    const { username } = useUser()
+    
 
 
   return (
     <div className="profile">
         <div className="left">
             <Avatar />
-            <div className="username">{name}</div>
+            <div className="username">{username}</div>
         </div>
         <div className="right">
             <p>+</p>

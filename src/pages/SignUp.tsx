@@ -2,6 +2,7 @@ import { useState } from "react"
 import type { User } from "../types/Sign.types"
 import './Sign.css'
 import { useNavigate } from "react-router-dom"
+import { useUser } from "../context/UserContext"
 const SignUp = () => {
       const [name, setName] = useState('')
       const [email, setEmail] = useState('')
@@ -10,6 +11,7 @@ const SignUp = () => {
       const [isVisiblePassword, setIsVisiblePassword] = useState(false)
       const [isEmailSame, setIsEmailSame] = useState('')
       const navigate = useNavigate()
+      const {setIsLogged, setUsername} = useUser()
       
       
     
@@ -21,11 +23,17 @@ const SignUp = () => {
             password: password,
             content: []
         }
+
+        
         
 
         const response = await fetch(`http://localhost:3000/users?email=${email}`);
         const data = await response.json();
 
+        const user:User = {
+          name: name,
+          email: email
+        }
         
         if (Array.isArray(data) && data.length > 0) {
           setIsEmailSame('Аккаунт с такой эл.почтой уже создан');
@@ -39,13 +47,13 @@ const SignUp = () => {
           body: JSON.stringify(newUser),
         });
 
-        localStorage.removeItem('user');
-        localStorage.setItem('user', JSON.stringify(newUser));
-
+        setUsername(data.name)
+        localStorage.removeItem('user')
+        localStorage.setItem('user', JSON.stringify(user))
         setEmail('');
         setPassword('');
         setName('');
-
+        setIsLogged(true)
         navigate('/app/home');
  
       }

@@ -1,11 +1,4 @@
-.firststroke{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    
-}
+
 
 .buttons{
     display: flex;
@@ -19,16 +12,20 @@
     border-radius: 20px;
 }
 
-.data{
-    margin-top: 20px;
+.advice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
-.HabitCard{
-    background-color: #bdb9b9;
-    padding: 20px;
-    border-radius: 20px;
-    
+.quickData{
+    display: flex;
+    width: 100%;
+    gap: 20px;
 }
+
+
 
 .percentage{
     
@@ -39,4 +36,28 @@
 .stats{
     display: flex;
     gap: 20px;
+}
+
+.mainData{
+   
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    gap: 20px;
+    min-height: 0;
+}
+
+
+
+.todaysHabits{
+    display: flex;
+    flex:1;
+}
+.progressAndActions{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 20px;
+    
 }

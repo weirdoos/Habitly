@@ -10,7 +10,7 @@ const HabitsCompletion = ({percent, size = 160}: RingProps) => {
     const p = Math.min(100, Math.max(0, percent))
 
   return (
-    <div className="HabitCard">
+    <div className="Card">
         <h3>Habit completion</h3>
         <div className="stats">
              <div className="round"

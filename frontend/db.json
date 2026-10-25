@@ -1,0 +1,127 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "phteree",
+      "email": "tigran.filosov@gmail.com",
+      "password": "CACA123321",
+      "content": {
+        "habits": [
+          {
+            "id": "109892",
+            "name": "попрыгать",
+            "completed": "70%",
+            "link": "ldkddffdsf",
+            "category": "спорт"
+          },
+          {
+            "id": "109342",
+            "name": "поприседать",
+            "completed": "30%",
+            "link": "ldkddffdsf",
+            "category": "спорт"
+          },
+          {
+            "id": "106343",
+            "name": "попукать",
+            "completed": "50%",
+            "link": "ldkddffdsf",
+            "category": "досуг"
+          },
+          {
+            "id": "106642",
+            "name": "покакать",
+            "completed": "10%",
+            "link": "ldkddffdsf",
+            "category": "прогулка"
+          }
+        ]
+      }
+    },
+    {
+      "name": "tigran",
+      "email": "tigran.filosov@gmail.commm",
+      "password": "CACA123321",
+      "id": "rcYio2C1ZLw"
+    },
+    {
+      "name": "dfgdfgdf",
+      "email": "tigran.filosov@gmail.comdddd",
+      "password": "CACA123321",
+      "id": "8G-TEFvXQ60",
+      "habits": [
+        {
+          "id": "c9eff952-083c-4d4a-b55b-a292082e7930",
+          "name": "выполнить дз",
+          "category": "учеба",
+          "completed": "20"
+        },
+        {
+          "id": "d39479fa-5bf2-44e0-8097-2ade81e4880b",
+          "name": "попукать",
+          "category": "учеба",
+          "completed": "0"
+        },
+        {
+          "id": "89086fd7-d42b-4e9b-b773-9cf57920842a",
+          "name": "cdfgdfg",
+          "category": "dfgdfg",
+          "completed": "0",
+          "link": "Habit.svg"
+        },
+        {
+          "id": "01fb1b9a-6162-4d92-ae29-52b5c56f7416",
+          "name": "sdfsdf",
+          "category": "sdfsdf",
+          "completed": "0",
+          "link": "habit.svg"
+        },
+        {
+          "id": "f4d13e32-f940-49a1-832d-37199ea13348",
+          "name": "sdfsdf",
+          "category": "sdfsdf",
+          "completed": "0",
+          "link": "habits.svg"
+        },
+        {
+          "id": "b01000cd-591f-45c3-9dc4-2b7d284274e4",
+          "name": "sdfsdf",
+          "category": "sdfsdf",
+          "completed": "0",
+          "link": "/public/habits.svg"
+        },
+        {
+          "id": "a009b742-9a46-43f6-ac03-3490e8669809",
+          "name": "dsdsd",
+          "category": "sdsd",
+          "completed": "0"
+        },
+        {
+          "id": "642d6b84-cd00-4a9b-a243-f4f84cb60fd5",
+          "name": "fdfdf",
+          "category": "dfdf",
+          "completed": "0"
+        },
+        {
+          "id": "1d8ca1fa-48c3-48a9-930e-9e96c1b9012f",
+          "name": "",
+          "category": "",
+          "completed": "0"
+        },
+        {
+          "id": "050a9749-efdc-4b35-b6b1-6e1eb232cfa1",
+          "name": "",
+          "category": "",
+          "completed": "0"
+        },
+        {
+          "id": "8ab2a15b-f568-4f2c-801c-29a0449d8787",
+          "name": "",
+          "category": "",
+          "completed": "0"
+        }
+      ]
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

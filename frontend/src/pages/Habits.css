@@ -1,0 +1,49 @@
+.habitsGrid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    overflow:scroll;
+}
+
+.Habit{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    flex: 1;
+    border: 1px #e4e4e4 solid;
+    box-shadow: 1 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s;
+
+    min-width: 200px;
+    min-height: 300px;
+
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    &:hover{
+        transform: scale(101%);
+    }
+    
+}
+
+.habitBtn{
+    background-color: #b8ff4f ;
+    border: none;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.cancel{
+
+}
+
+.delete{
+
+}

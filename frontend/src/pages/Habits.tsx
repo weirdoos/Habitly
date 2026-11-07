@@ -9,7 +9,7 @@ import { useModal } from "../context/ModalContext"
 import Modal from "../components/Modal"
 
 
-type Habits = {name:string, link?:string, category:string, id:string, completed:string}
+type Habits = {name:string, link?:string, category:string, id:string, isCompleted:boolean, percentage?:number, }
 
 const Habits = () => {
   const url = import.meta.env.VITE_URL
@@ -65,13 +65,14 @@ useEffect(() => {
         id: crypto.randomUUID(),
         name:name,
         category:category,
-        completed: '0',
+        isCompleted: false,
+        percentage: 0
         
       }
 
       const updatedHabits = [...habits, newHabit]
       setHabits(updatedHabits)
-      const response = await fetch(`${url}/users/${id}`, {
+      const response = await fetch(`${url}/api/habits?email=${encodeURIComponent(email)}`, {
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json'

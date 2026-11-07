@@ -2,7 +2,7 @@
 import './Page.css'
 import './Home.css'
 import HabitsCompletion from "../components/HabitsCompletion"
-//import { useUser } from '../context/UserContext'
+import { useUser } from '../context/UserContext'
 import CurrentStreakBlock from '../components/CurrentStreakBlock'
 import Advice from '../components/Advice'
 import TodaysHabits from '../components/TodaysHabits'
@@ -11,7 +11,8 @@ import QuickActions from '../components/QuickActions'
 import Header from '../components/Header'
 
 const Home = () => {
-  //const { username, isLogged } = useUser()
+  const { username, isLogged, email } = useUser()
+  console.log(username, isLogged, email)
   
 
   

@@ -4,14 +4,15 @@ import './Sign.css'
 import { useNavigate } from "react-router-dom"
 import { useUser } from "../context/UserContext"
 const SignUp = () => {
-      const [name, setName] = useState('')
-      const [email, setEmail] = useState('')
+      const [inputName, setInputName] = useState('')
+      const [inputEmail, setInputEmail] = useState('')
       const [password, setPassword] = useState('')
       const [passwordError, setPasswordError] = useState('')
       const [isVisiblePassword, setIsVisiblePassword] = useState(false)
       const [isEmailSame, setIsEmailSame] = useState('')
       const navigate = useNavigate()
-      const {setIsLogged, setUsername} = useUser()
+      const {setIsLogged, setUsername, setEmail} = useUser()
+      const URL = import.meta.env.VITE_URL
       
       
     
@@ -21,38 +22,38 @@ const SignUp = () => {
             username: name,
             email: email,
             password: password,
+            id: crypto.randomUUID(),
             
         }
         console.log(newUser)
         
         
 
-        /*const response = await fetch(`http://localhost:3000/users?email=${email}`);
-        const data = await response.json();
-
-        const user:User = {
-          name: name,
-          email: email
+        const findResponse = await fetch(`${URL}/api/signup?email=${encodeURIComponent(email)}`);
+        
+        if (findResponse.status === 409) {
+          setIsEmailSame('Пользователь с таким email уже существует')
+          return
         }
-        
-        if (Array.isArray(data) && data.length > 0) {
-          setIsEmailSame('Аккаунт с такой эл.почтой уже создан');
-          return; 
-        }*/
 
-        
-        const response = await fetch(`http://localhost:5000/`, {
+        if (findResponse.status !== 200) {
+          setIsEmailSame(`Ошибка при проверке email: ${findResponse.status} ${findResponse.statusText}`);
+          return
+        }
+
+        const createResponse = await fetch(`${URL}/api/users`, {
           method: 'POST',
           headers: { 'Content-type': 'application/json' },
           body: JSON.stringify(newUser),
         });
-        console.log(response)
-        //setUsername(data.name)
+        console.log(createResponse)
+        setUsername(newUser.username)
+        setEmail(newUser.email)
         localStorage.removeItem('user')
-        localStorage.setItem('user', JSON.stringify(user))
-        setEmail('');
+        localStorage.setItem('user', JSON.stringify(newUser))
+        setInputEmail('');
         setPassword('');
-        setName('');
+        setInputName('');
         setIsLogged(true)
         navigate('/app/home');
  
@@ -60,14 +61,14 @@ const SignUp = () => {
 
       function registration () {
         setIsEmailSame('')
-        if (name.trim() === '' || email.trim() === '' || password.trim() === '') {
+        if (inputName.trim() === '' || inputEmail.trim() === '' || password.trim() === '') {
           setPasswordError('Заполните все поля')
           return
         } else if (password.trim().length < 8) {
           setPasswordError('Слишком короткий пароль')
           return
         } else {
-          fetchAddUser(name, email, password)
+          fetchAddUser(inputName, inputEmail, password)
         }
         
       }
@@ -91,12 +92,12 @@ const SignUp = () => {
                   <div className="form">
                     <div className="name label">
                       <label htmlFor="name">Full Name</label>
-                      <input id="name" type="text" placeholder="Alex Johnson" value={name} onChange={(e) => setName(e.target.value)} />
+                      <input id="name" type="text" placeholder="Alex Johnson" value={inputName} onChange={(e) => setInputName(e.target.value)} />
                     </div>
 
                     <div className="email label">
                       <label htmlFor="email">Email address</label>
-                      <input id="email" type="text" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+                      <input id="email" type="text" placeholder="you@example.com" value={inputEmail} onChange={(e) => setInputEmail(e.target.value)} />
                     </div>
                     
 

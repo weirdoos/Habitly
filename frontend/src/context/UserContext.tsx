@@ -17,17 +17,10 @@ interface UserContextValue {
 const UserContext = createContext<UserContextValue | undefined>(undefined)
 
 export const UserProvider = ({children}: {children: ReactNode}) => {
+    const [email, setEmail] = useState<string | null>(null)
+  
+ 
 
-  const url = import.meta.env.VITE_URL
-
-    const [user, setUser] = useState<User | null>(() => {
-    try {
-      const raw = localStorage.getItem('user');
-      return raw ? (JSON.parse(raw) as User) : null;
-    } catch {
-      return null;
-    }
-  });
 
     useEffect(() => {
     if (user) {
@@ -42,22 +35,16 @@ export const UserProvider = ({children}: {children: ReactNode}) => {
         
         return user ? true : false
     })
-    const [username, setUsername] = useState<string | null>(() => {
-        
-        
-        return user?.name ? user.name : null
+    const [username, setUsername] = useState<string | null>(() => { 
+        return user?.username ? user.username : null
     })
     
-    const [email, setEmail] = useState<string | null>(() => {
-        return user?.email ? user.email : null
-    })
-
-    const [id, setId] = useState<string | null>(() => {
-        return user?.id ? user.id : null
-    })
-
     
 
+    const [id, setId] = useState<string | null>(null)
+
+    
+    console.log('UserContext rendered with user:', user);
     
 
     

@@ -5,12 +5,13 @@ import { useUser } from "../context/UserContext"
 import type { User } from "../types/Sign.types"
 const SignUp = () => {
 
-      const {setIsLogged, isLogged , setUsername} = useUser()
+      const {setIsLogged, isLogged , setUsername, setEmail} = useUser()
       
-      const [email, setEmail] = useState('')
-      const [password, setPassword] = useState('')
+      const [inputEmail, setInputEmail] = useState('')
+      const [inputPassword, setInputPassword] = useState('')
       const [isVisiblePassword, setIsVisiblePassword] = useState(false)
       const navigate = useNavigate()
+      const URL = import.meta.env.VITE_URL
       
       
     
@@ -19,30 +20,31 @@ const SignUp = () => {
 
     
         
-        const response = await fetch(`http://localhost:3000/users?email=${email}`)
-        const data = await response.json()
-        const result = data[0]
-
-        const user:User = {
-          name: result.name,
-          email: result.email,
-          id: result.id
-        }
-
-        if(result.password === password) {
+        const response = await fetch(`${URL}/api/signin?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
+        
+        if(response.status === 200) {
+            const result = await response.json();
+            const user: User = {
+                username: result.username,
+                email: result.email,
+                id: result._id,
+            }
+            console.log(result)
+            console.log(user)
             setIsLogged(true)
-            setUsername(result.name)
+            setUsername(result.username)
+            setEmail(result.email)
             localStorage.removeItem('user')
             localStorage.setItem('user', JSON.stringify(user))
             navigate('/app/home')
             setIsVisiblePassword(false)
-            setEmail('')
-            setPassword('')
+            setInputEmail('')
+            setInputPassword('')
         } else {
           setIsLogged(false)
         }
-        setEmail('')
-        setPassword('')
+        setInputEmail('')
+        setInputPassword('')
         
         
       }
@@ -65,19 +67,19 @@ const SignUp = () => {
 
                     <div className="email label">
                       <label htmlFor="email">Email address</label>
-                      <input id="email" type="text" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+                      <input id="email" type="text" placeholder="you@example.com" value={inputEmail} onChange={(e) => setInputEmail(e.target.value)} />
                     </div>
                     
 
                     <div className="password label">
                       <label htmlFor="password">Password</label>
-                      <input id="password" type={isVisiblePassword ? "text" : "password"} placeholder="********" value={password} onChange={(e) => setPassword(e.target.value)} />
+                      <input id="password" type={isVisiblePassword ? "text" : "password"} placeholder="********" value={inputPassword} onChange={(e) => setInputPassword(e.target.value)} />
                       <button onClick={() => setIsVisiblePassword(prev => !prev)} type="button">show password</button>
                     </div>
                     <p style={{color: 'red'}}>{!isLogged ? 'Неверный пароль' : '' }</p>
                     
                     
-                    <button className="signInBtn" onClick={() => fetchAddUser(email, password)}>Log in</button>
+                    <button className="signInBtn" onClick={() => fetchAddUser(inputEmail, inputPassword)}>Log in</button>
                     <p>Don`t have an account? <a className="link" href="/sign-up">Register</a></p>
                   </div>
                   

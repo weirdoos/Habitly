@@ -1,25 +1,18 @@
-
-import './Sidebar.css'
-import Avatar from './Avatar'
-import { useUser } from '../context/UserContext'
+import "./Sidebar.css";
+import Avatar from "./Avatar";
 
 const Profile = () => {
-    
-    const { username } = useUser()
-    
-
-
   return (
     <div className="profile">
-        <div className="left">
-            <Avatar />
-            <div className="username">{username}</div>
-        </div>
-        <div className="right">
-            <p>+</p>
-        </div>
+      <div className="left">
+        <Avatar />
+        <div className="username">cscscs</div>
+      </div>
+      <div className="right">
+        <p>+</p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

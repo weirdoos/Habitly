@@ -1,40 +1,25 @@
-import './Modal.css'
-
-interface Modal {
-    name:string,
-    children: React.ReactNode,
-    modalCardClass: string,
-    closeModalCard: () => void,
-    onClick: () => void
-}
-
-const Modal = ({name ,closeModalCard, modalCardClass, children, onClick}:Modal) => {
-  
-    
-    
+import "./Modal.css";
+function Modal(children: any) {
   return (
-    <div className={modalCardClass}>
-        <div className="layer">
-            <div className="modal">
-                <div className="modalMain">
-                    <div className="modalHeader">
-                        <h1>{name}</h1>
-                        <button className='modalBtn' onClick={closeModalCard}>x</button>
-                    </div>
-
-                    <div className="modalContent">
-                        {children}
-                    </div>
-                </div>
-                
-
-                <div className="modalFooter">
-                    <button className='modalConfirm' type="button" onClick={onClick} >{name}</button>
-                </div>
+    <div>
+      <div className="layer">
+        <div className="modal">
+          <div className="modalMain">
+            <div className="modalHeader">
+              <h1></h1>
+              <button className="modalBtn">x</button>
             </div>
+
+            <div className="modalContent">{children}</div>
+          </div>
+
+          <div className="modalFooter">
+            <button className="modalConfirm" type="button"></button>
+          </div>
         </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Modal
+export default Modal;

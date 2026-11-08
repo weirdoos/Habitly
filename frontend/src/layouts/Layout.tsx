@@ -1,35 +1,17 @@
-import { Outlet, useNavigate } from "react-router-dom"
-import Sidebar from "../components/Sidebar"
-import './Layout.css'
-import { useUser } from "../context/UserContext"
-import { useEffect } from "react"
-
+import { Outlet } from "react-router-dom";
+import Sidebar from "../components/Sidebar";
+import "./Layout.css";
 
 const Layout = () => {
-  const {isLogged} = useUser()
-  const navigate = useNavigate()
-  console.log(isLogged)
-
-  useEffect(() => {
-    if (isLogged === false) {
-        navigate('/sign-in')
-  }},[]) 
-  
-
   return (
     <div className="layout">
+      <Sidebar />
 
-        <Sidebar />
-
-        
-        <main>
-            <Outlet />
-        </main>
-        
-        
-
+      <main>
+        <Outlet />
+      </main>
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

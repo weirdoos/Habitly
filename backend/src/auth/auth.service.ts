@@ -41,7 +41,7 @@ export class AuthService {
 
     if (!user) throw new UnauthorizedException('почта или пароль не совпадают');
 
-    const ok = bcrypt.compare(dto.password, user.password);
+    const ok = await bcrypt.compare(dto.password, user.password);
 
     if (!ok) throw new UnauthorizedException('почта или пароль не совпадают');
 
@@ -83,6 +83,7 @@ export class AuthService {
     const accessToken = await this.jwtService.signAsync(
       { sub: user.id, email: user.email },
       {
+        secret: this.config.getOrThrow<string>('JWT_ACCESS_SECRET'),
         expiresIn: this.config.get<string>('ACCESS_EXPIRE', '15m') as any,
       },
     );

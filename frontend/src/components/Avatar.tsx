@@ -1,13 +1,7 @@
-import { useUser } from '../context/UserContext'
-import './Sidebar.css'
+import "./Sidebar.css";
 
 const Avatar = () => {
+  return <div className="avatar">scsc</div>;
+};
 
-  const { username } = useUser()
-
-  return (
-    <div className="avatar">{username !== null ? username[0].toUpperCase() : ''}</div>
-  )
-}
-
-export default Avatar
+export default Avatar;

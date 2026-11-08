@@ -7,13 +7,13 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { HabitsService } from './habits.service.js';
+import { GoalService } from './goal.service.js';
 import { CreateHabitDto } from './dto/create-habit.dto.js';
 import { UpdateHabitDto } from './dto/update.habit.dto.js';
 
 @Controller('habits')
-export class HabitsController {
-  constructor(private readonly habitsService: HabitsService) {}
+export class GoalController {
+  constructor(private readonly habitsService: GoalService) {}
 
   @Post('create')
   async createHabit(
@@ -31,17 +31,17 @@ export class HabitsController {
   @Put('by-habit-id')
   async updateHabit(
     @Query('userId') userId: string,
-    @Query('habitId') habitId: number,
+    @Query('habitId') habitId: string,
     @Body() dto: UpdateHabitDto,
   ) {
-    return this.habitsService.updateHabit(userId, +habitId, dto);
+    return this.habitsService.updateHabit(userId, habitId, dto);
   }
 
   @Delete('delete')
   async deleteHabit(
     @Query('userId') userId: string,
-    @Query('habitId') habitId: number,
+    @Query('habitId') habitId: string,
   ) {
-    return this.habitsService.deleteHabit(userId, +habitId);
+    return this.habitsService.deleteHabit(userId, habitId);
   }
 }

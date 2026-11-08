@@ -9,6 +9,21 @@ import { Prisma } from '@prisma/client';
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
+  async findById(id: string) {
+    return await this.prisma.user.findUnique({ where: { id } });
+  }
+
+  async findByEmail(email: string) {
+    return await this.prisma.user.findUnique({ where: { email: email } });
+  }
+
+  async setRefreshTokenHash(userId: string, hash: string | null) {
+    return this.prisma.user.update({
+      where: { id: userId },
+      data: { refreshTokenHash: hash },
+    });
+  }
+
   async getAllUsers() {
     return this.prisma.user.findMany();
   }
@@ -25,11 +40,10 @@ export class UsersService {
           password: hashedPassword,
         },
       });
+      return user;
     } catch (e) {
       throw new InternalServerErrorException(e);
     }
-
-    return true;
   }
 
   async putUser(id: string, dto: UpdateUserDto) {

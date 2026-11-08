@@ -9,7 +9,7 @@ import { UpdateHabitDto } from './dto/update.habit.dto.js';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
-export class HabitsService {
+export class GoalService {
   constructor(private readonly prisma: PrismaService) {}
 
   async createHabit(userId: string, dto: CreateHabitDto) {
@@ -18,7 +18,7 @@ export class HabitsService {
     if (!user) throw new NotFoundException(`Пользователь с таким id не найден`);
     console.log(user);
 
-    return this.prisma.habit.create({
+    return this.prisma.goal.create({
       data: {
         title: dto.title,
         description: dto.description,
@@ -29,11 +29,33 @@ export class HabitsService {
   }
 
   async getByUserId(userId: string) {
-    return this.prisma.habit.findMany({ where: { userId } });
+    const goals = await this.prisma.goal.findMany({
+      where: { userId },
+      include: {
+        tasks: {
+          select: {
+            id: true,
+            title: true,
+            isCompleted: true,
+          },
+        },
+      },
+    });
+
+    return goals.map(({ tasks, ...goal }) => {
+      const total = tasks.length;
+      const completed = tasks.filter((m) => m.isCompleted).length;
+
+      return {
+        ...goal,
+        percentage: total === 0 ? 0 : Math.ceil((100 / total) * completed),
+        tasks,
+      };
+    });
   }
 
-  async updateHabit(userId: string, habitId: number, dto: UpdateHabitDto) {
-    const habit = await this.prisma.habit.findUnique({
+  async updateHabit(userId: string, habitId: string, dto: UpdateHabitDto) {
+    const habit = await this.prisma.goal.findUnique({
       where: { id: habitId },
     });
     if (!habit)
@@ -44,7 +66,7 @@ export class HabitsService {
     if (habit?.userId !== userId)
       throw new NotFoundException('эта привычка не принадлежит вам');
 
-    const data: Prisma.HabitUpdateInput = {};
+    const data: Prisma.GoalUpdateInput = {};
 
     if (dto.title !== undefined) data.title = dto.title;
     if (dto.description !== undefined) data.description = dto.description;
@@ -52,7 +74,7 @@ export class HabitsService {
     if (dto.isCompleted !== undefined) data.isCompleted = dto.isCompleted;
     if (dto.category !== undefined) data.category = dto.category;
 
-    const updatedHabit = await this.prisma.habit.update({
+    const updatedHabit = await this.prisma.goal.update({
       where: { id: habitId },
       data: data,
     });
@@ -60,14 +82,14 @@ export class HabitsService {
     return true;
   }
 
-  async deleteHabit(userId: string, habitId: number) {
-    const habit = await this.prisma.habit.findUnique({
+  async deleteHabit(userId: string, habitId: string) {
+    const habit = await this.prisma.goal.findUnique({
       where: { id: habitId },
     });
     if (!habit)
       throw new NotFoundException('привычки с таким id не существует');
 
-    return this.prisma.habit.delete({
+    return this.prisma.goal.delete({
       where: { id: habitId },
     });
   }

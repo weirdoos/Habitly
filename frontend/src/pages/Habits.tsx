@@ -8,6 +8,7 @@ import Modal from "../components/Modal";
 import { accessToken, apiClient } from "../utils/axios";
 import { useAuth } from "../context/UserContext";
 import type { AddHabit } from "../types/Data.types";
+import GoalModal from "../components/GoalModal";
 
 type Habits = {
   name: string;
@@ -24,6 +25,7 @@ const Habits = () => {
   const [habitName, setHabitName] = useState<string>("");
   const [habitCategory, setHabitCategory] = useState<string>("");
   const [addModalOpen, setAddModalOpen] = useState<boolean>(false);
+  const [modalHabit, setModalHabit] = useState(null);
   console.log(habits);
   console.log(accessToken);
 
@@ -74,6 +76,13 @@ const Habits = () => {
           />
         </div>
       </Modal>
+      {modalHabit && (
+        <GoalModal
+          habit={modalHabit}
+          onClose={() => setModalHabit(null)}
+          getData={getData}
+        ></GoalModal>
+      )}
 
       <Header />
 
@@ -85,7 +94,14 @@ const Habits = () => {
         />
         <div className="habitsGrid">
           {habits.map((item) => {
-            return <Habit title={item.title} category={item.category} />;
+            console.log(item);
+            return (
+              <Habit
+                title={item.title}
+                category={item.category}
+                onOpen={() => setModalHabit(item)}
+              />
+            );
           })}
         </div>
       </div>

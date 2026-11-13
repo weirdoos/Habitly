@@ -1,83 +1,154 @@
-.hidden{
-    display: none;
-    transition: all 0.2s;
+.hidden {
+  display: none;
+  transition: all 0.2s;
 }
 
-.layer{
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background-color: transparent;
-    z-index: 999;
+.layer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  z-index: 999;
 }
 
-.modal{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #e4e4e4;
+  position: fixed;
+  top: calc(50vh - 270px);
+  right: calc(50vw - 190px);
+  min-width: 300px;
+  min-height: 500px;
+  background-color: #0f1214;
+  z-index: 1000;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px #e4e4e4 solid;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.modalBtn {
+  background-color: rgb(251, 40, 40);
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  color: #e4e4e4;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(110%);
+    background-color: #e4e4e4;
+    color: rgb(251, 40, 40);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.modalContent {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.modalConfirm {
+  width: 100%;
+  bottom: 30px;
+  max-height: fit-content;
+  display: flex;
+  background-color: #b8ff4f;
+  border-radius: 15px;
+  border: none;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  font-weight: 800;
+  font-size: medium;
+  transition: all 0.2s;
+
+  &:hover {
     color: #e4e4e4;
-    position: fixed;
-    top: calc(50vh - 270px);
-    right: calc(50vw - 190px);
-    min-width: 300px;
-    min-height: 500px;
-    background-color: #0f1214;
-    z-index: 1000;
-    padding: 20px;
-    border-radius: 20px;
-    border: 1px #e4e4e4 solid;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-
+    background-color: #222222;
+    transform: scale(102%);
+  }
 }
 
-.modalBtn{
-    background-color: rgb(251, 40, 40);
-    width: 30px;
-    height: 30px;
-    border: none;
-    border-radius: 50%;
+.modalHabit {
+  position: absolute;
+  z-index: 1000;
+  top: 15%;
+  right: 35%;
+  padding: 20px;
+  background-color: #0f1214;
+  color: #e4e4e4;
+  min-width: 400px;
+  min-height: 600px;
+  border-radius: 20px;
+}
+
+.addTask {
+  display: flex;
+  justify-content: center;
+}
+
+.TaskCard {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 5px;
+  align-items: center;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  border-radius: 10px;
+
+  &:hover {
     color: #e4e4e4;
-    transition: all 0.2s;
-
-    &:hover{
-        transform: scale(110%);
-        background-color: #e4e4e4;
-        color: rgb(251, 40, 40) ;
-    }
+    background-color: #222222;
+    transform: scale(102%);
+  }
 }
 
-.modalHeader{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
+.left {
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
-.modalContent{
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #b8ff4f;
+  cursor: pointer;
 }
 
-.modalConfirm{
-    width: 100%;
-    bottom: 30px;
-    display: flex;
-    background-color: #b8ff4f;
-    border-radius: 15px;
-    border: none;
-    padding: 15px;
-    display: flex;
-    justify-content: center;
-    font-weight: 800;
-    font-size: medium;
-    transition: all 0.2s;
+.inputTaskTitle {
+  height: 30px;
+}
 
-    &:hover{
-        color: #e4e4e4;
-        background-color: #222222;
-        transform: scale(102%);
-    }
-    
+.modalConfirmTaskTitle {
+  height: 60px;
+  width: 100%;
+  max-height: fit-content;
+  background-color: #b8ff4f;
+  border-radius: 15px;
+  border: none;
+  padding: 15px;
+  justify-content: center;
+  font-weight: 800;
+  font-size: medium;
+  transition: all 0.2s;
+
+  &:hover {
+    color: #e4e4e4;
+    background-color: #222222;
+    transform: scale(102%);
+  }
 }

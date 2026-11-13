@@ -5,6 +5,7 @@ type HabitProps = {
   title: string;
   category: string;
   completed: number;
+  onOpen: (value: React.SetStateAction<null>) => void;
   openDeleteModal: () => void;
 };
 
@@ -14,6 +15,7 @@ const Habit = ({
   category,
   completed,
   openDeleteModal,
+  onOpen,
 }: HabitProps) => {
   const parsed = Number(completed);
   const percent = Number.isFinite(parsed)
@@ -22,7 +24,7 @@ const Habit = ({
   console.log(link);
 
   return (
-    <div className="Habit">
+    <div className="Habit" onClick={onOpen}>
       <div className="habitHeader">
         <h2>{title}</h2>
         <button className="btn" type="button" onClick={openDeleteModal}>

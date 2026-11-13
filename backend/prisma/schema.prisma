@@ -13,6 +13,7 @@ model User {
   email     String   @unique
   password  String
   refreshTokenHash String?
+  streak Int @default(0)
 
   goals  Goal[]
 

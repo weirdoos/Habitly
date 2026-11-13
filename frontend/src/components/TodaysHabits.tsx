@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import Habit from "./Habit";
 
-const TodaysHabits = () => {
+const TodaysHabits = ({ habit }) => {
   return (
-    <div className='Card'>TodaysHabits</div>
-  )
-}
+    <div className="Card">
+      <h1>Today`s habit</h1>
+      <Habit title={habit.title} completed={habit.percentage} />
+    </div>
+  );
+};
 
-export default TodaysHabits
+export default TodaysHabits;

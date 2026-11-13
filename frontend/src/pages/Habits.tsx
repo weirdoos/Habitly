@@ -5,6 +5,9 @@ import Button from "../components/Button";
 import { useEffect, useState } from "react";
 import Habit from "../components/Habit";
 import Modal from "../components/Modal";
+import { accessToken, apiClient } from "../utils/axios";
+import { useAuth } from "../context/UserContext";
+import type { AddHabit } from "../types/Data.types";
 
 type Habits = {
   name: string;
@@ -16,33 +19,40 @@ type Habits = {
 };
 
 const Habits = () => {
-  const url = import.meta.env.VITE_URL;
+  const { user } = useAuth();
   const [habits, setHabits] = useState<Habits[]>([]);
   const [habitName, setHabitName] = useState<string>("");
   const [habitCategory, setHabitCategory] = useState<string>("");
+  const [addModalOpen, setAddModalOpen] = useState<boolean>(false);
   console.log(habits);
+  console.log(accessToken);
+
+  async function getData() {
+    const data = await apiClient.get("/goals/by-user-id");
+    setHabits(data.data);
+    console.log(data);
+  }
+  console.log(user?.id);
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function addHabit() {
+    const newHabit: AddHabit = {
+      title: habitName,
+      category: habitCategory,
+    };
+    const data = apiClient.post("/goals/create", newHabit);
+    getData();
+  }
 
   return (
     <div className="page">
       <Modal
-        name="удалить привычку"
-        //closeModalCard=
-        modalCardClass=""
-        onClick=""
-      >
-        <button className="cancel" type="button">
-          отменить
-        </button>
-        <button className="delete" type="button">
-          удалить
-        </button>
-      </Modal>
-
-      <Modal
         name="Добавить привычку"
-        closeModalCard={closeModalCard}
-        modalCardClass={modalCardClass}
-        onClick={() => addHabit(habitName, habitCategory)}
+        isOpened={addModalOpen}
+        setIsOpened={setAddModalOpen}
+        onClick={addHabit}
       >
         <div className="label">
           <label htmlFor="nameInput">Habit name</label>
@@ -71,20 +81,11 @@ const Habits = () => {
         <Button
           name="+ add habit"
           classname="habitBtn"
-          onClick={openModalCard}
+          onClick={() => setAddModalOpen((prev) => !prev)}
         />
         <div className="habitsGrid">
           {habits.map((item) => {
-            return (
-              <Habit
-                key={item.name}
-                name={item.name}
-                link={item.link}
-                category={item.category}
-                completed={item.completed}
-                openDeleteModal={openModalCard}
-              />
-            );
+            return <Habit title={item.title} category={item.category} />;
           })}
         </div>
       </div>

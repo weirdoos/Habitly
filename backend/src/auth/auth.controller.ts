@@ -1,8 +1,19 @@
-import { Body, Controller, HttpCode, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Cookies,
+  HttpCode,
+  Post,
+  Res,
+  UnauthorizedException,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service.js';
 import { CreateUserDto } from '../users/dto/create-user.dto.js';
 import { LoginDto } from './dto/login.dto.js';
 import type { Response, Request } from 'express';
+import { HttpProxy } from 'vite';
+import { JwtAuthGuard } from '../guards/jwt-auth.guard.js';
 
 @Controller('auth')
 export class AuthController {
@@ -27,6 +38,20 @@ export class AuthController {
   ) {
     const { refreshToken, ...rest } = await this.authService.login(dto);
     this.setRefreshCookie(res, refreshToken);
+    return rest;
+  }
+
+  @Post('refresh')
+  @HttpCode(200)
+  async refresh(
+    @Cookies('refresh_token') token: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    if (!token) {
+      throw new UnauthorizedException('Такого пользователя не существует');
+    }
+
+    const { refreshToken, ...rest } = await this.authService.refresh(token);
     return rest;
   }
 

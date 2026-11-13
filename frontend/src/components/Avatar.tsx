@@ -1,7 +1,9 @@
+import { useAuth } from "../context/UserContext";
 import "./Sidebar.css";
 
 const Avatar = () => {
-  return <div className="avatar">scsc</div>;
+  const { user } = useAuth();
+  return <div className="avatar">{user?.username[0]}</div>;
 };
 
 export default Avatar;

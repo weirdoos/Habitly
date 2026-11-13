@@ -18,7 +18,7 @@ export class GoalService {
     if (!user) throw new NotFoundException(`Пользователь с таким id не найден`);
     console.log(user);
 
-    return this.prisma.goal.create({
+    await this.prisma.goal.create({
       data: {
         title: dto.title,
         description: dto.description,
@@ -26,6 +26,8 @@ export class GoalService {
         userId,
       },
     });
+
+    return this.prisma.goal.findMany({ where: { userId } });
   }
 
   async getByUserId(userId: string) {

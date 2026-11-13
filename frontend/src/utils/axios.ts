@@ -1,4 +1,6 @@
-import axios from "axios";
+import axios, { AxiosError, type InternalAxiosRequestConfig } from "axios";
+import { useAuth } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export let accessToken: string | null = null;
 
@@ -27,3 +29,49 @@ apiClient.interceptors.request.use((config) => {
   }
   return config;
 });
+
+let refreshPromise: Promise<string> | null = null;
+
+apiClient.interceptors.response.use(
+  (res) => res,
+  async (error: AxiosError) => {
+    const original = error.config as InternalAxiosRequestConfig & {
+      _retry?: boolean;
+    };
+
+    if (
+      error.response?.status !== 401 ||
+      original.url?.includes("/auth/refresh") ||
+      original._retry
+    ) {
+      return Promise.reject(error);
+    }
+
+    original._retry = true;
+
+    if (!refreshPromise) {
+      refreshPromise = apiClient
+        .post<{ accessToken: string }>("/auth/refresh")
+        .then(({ data }) => {
+          setAccessToken(data.accessToken);
+          return data.accessToken;
+        })
+        .finally(() => {
+          refreshPromise = null;
+        });
+    }
+
+    try {
+      const newToken = await refreshPromise;
+      original.headers.Authorization = `Bearer ${newToken}`;
+      return apiClient(original);
+    } catch (refreshError) {
+      const { logout } = useAuth();
+      const navigate = useNavigate();
+      navigate("/sign-in");
+      setAccessToken(null);
+      logout();
+      return Promise.reject(refreshError);
+    }
+  },
+);

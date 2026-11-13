@@ -3,6 +3,7 @@ import "./Sign.css";
 import { register, type RegisterPayload } from "../utils/auth";
 import { accessToken } from "../utils/axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/UserContext";
 const SignUp = () => {
   const [inputName, setInputName] = useState("");
   const [inputEmail, setInputEmail] = useState("");
@@ -10,6 +11,7 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   async function registration() {
     const newUser: RegisterPayload = {
@@ -20,10 +22,14 @@ const SignUp = () => {
 
     try {
       const data = await register(newUser);
-      console.log(accessToken, data);
-      navigate("/app/home");
-    } catch (e) {
-      setError(e.message);
+      console.log(accessToken, user);
+      if (!accessToken) {
+        throw new Error("bla bla");
+      } else {
+        navigate("/app/home");
+      }
+    } catch (e: unknown) {
+      setError(e);
     }
   }
 
